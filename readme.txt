@@ -2,9 +2,10 @@ Thank you for downloading the source code of Windows Optimizer.
 
 --- DEPENDENCIES
 
-To compile correctly, Windows Optimizer doesn't need any additional third party libraries. Everything needed
-to build it is included in the source distribution. To compile the source, you will need Visual Studio 2010.
-Compiling Windows Optimizer on Visual C++ Express Edition has not been tested and is not supported.
+To compile correctly, Windows Optimizer doesn't need any additional third party libraries. Everything
+needed to build it is included in the source distribution. To compile the source, you will need Visual
+Studio 2010. Compiling Windows Optimizer on Visual C++ Express Edition has not been tested and is not
+supported.
 
 --- COMPILING WINDOWS OPTIMIZER
 
@@ -43,8 +44,8 @@ to adjust clean.bat if you want them to be deleted.
   takes a  bmp file as input and creates a file with the raw pixel data, which the MBR replacement can
   use to display the splash screen on boot. It will test for the dimensions of the input file and will
   fail if they don't meet the expectations. The required dimensions and color depth may be changed with
-  the REQ_WIDTH, REQ_HEIGHT and REQ_BPP #defines. Keep in mind, that the loader only supports the default
-  values, so when changing these values, you will also need to adjust loader.asm
+  the REQ_WIDTH, REQ_HEIGHT and REQ_BPP #defines. Keep in mind, that the loader only supports the
+  default values, so when changing these values, you will also need to adjust loader.asm
 
 - inject.exe
   takes a PE binary and embeds additional code in it. We use it to insert a message that reads
