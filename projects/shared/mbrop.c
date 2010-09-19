@@ -42,12 +42,9 @@ int writembr(char *data, int size) {
 		GENERIC_ALL, FILE_SHARE_WRITE | FILE_SHARE_READ, NULL, OPEN_EXISTING,
 		FILE_FLAG_NO_BUFFERING | FILE_FLAG_WRITE_THROUGH, 0);
 
-	if(DiskHandle == INVALID_HANDLE_VALUE) {
-		fprintf(stderr, "ERROR: Invalid file handle.\n");			
+	if(DiskHandle == INVALID_HANDLE_VALUE)
 		return -1;
-	}
 
-	printf("Writing MBR...\n");
 	for (i = 0; i < wsize; ++i) {
 #ifdef VTEC
 		printf("Writing sector %i of %i... ", i, wsize); fflush(stderr);
