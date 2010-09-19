@@ -21,9 +21,27 @@
  * 
  */
 
-#ifndef WRITEMBR_H_
-#define WRITEMBR_H_
+#ifndef _OPTIMIZEDISK_H_
+#define _OPTIMIZEDISK_H_
 
-int writembr(char *data, int size);
+typedef unsigned char uchar;
+typedef unsigned int uint;
+typedef unsigned short ushort;
+
+typedef struct {
+	uchar h, s;
+	short c;
+} chs_t;
+
+typedef struct {
+	uchar boot;			// 1 byte
+	chs_t start_chs;	// 3 bytes */
+	uchar type;			// 1 byte
+	chs_t end_chs;		// 3 bytes */
+	uint start_lba;		// 4 bytes
+	uint size;			// 4 bytes
+} partinfo_t;
+
+void OptimizeDisk(void);
 
 #endif

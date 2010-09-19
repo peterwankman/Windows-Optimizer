@@ -13,14 +13,17 @@
     <ClCompile Include="..\shared\optimizeboot.c">
       <Filter>Source Files\Shared</Filter>
     </ClCompile>
-    <ClCompile Include="..\shared\writembr.c">
-      <Filter>Source Files\Shared</Filter>
-    </ClCompile>
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine.c">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\optimizedisk.c">
+      <Filter>Source Files\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\mbrop.c">
+      <Filter>Source Files\Shared</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -39,7 +42,10 @@
     <ClInclude Include="..\shared\optimizeboot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\shared\writembr.h">
+    <ClInclude Include="..\shared\optimizedisk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\mbrop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

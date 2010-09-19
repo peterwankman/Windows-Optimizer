@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
 	}
 
 	printf("Opening %s...\n", argv[1]);
-	if((input = fopen(argv[1], "r")) == NULL) {
+	if((input = fopen(argv[1], "rb")) == NULL) {
 		fprintf(stderr, "ERROR: Could not open '%s' for reading.\n", argv[1]);
 		return -1;
 	}
@@ -94,11 +94,11 @@ int main(int argc, char **argv) {
 		fclose(output);
 		return -1;
 	}
-
+/*
 #ifdef _WIN32
 	_setmode(_fileno(input), _O_BINARY);
 #endif
-
+*/
 	fseek(input, 0, SEEK_END);
 	size = ftell(input);
 	if(size > LDRSIZE) {
@@ -131,10 +131,12 @@ int main(int argc, char **argv) {
 
 		printf("Writing additional code to %s...\n", addcode);
 
-		output = fopen(addcode, "w");
+		output = fopen(addcode, "wb");
+/*
 #ifdef _WIN32
 	_setmode(_fileno(output), _O_BINARY);
 #endif
+*/
 		do {
 			size = fread(loader, LDRSIZE, 1, input);
 			fwrite(loader, size * LDRSIZE, 1, output);

@@ -119,13 +119,15 @@ int main(int argc, char **argv) {
 	}
 
 	printf("Opening input file... ");
-	if((in = fopen(argv[1], "r")) == NULL) {
+	if((in = fopen(argv[1], "rb")) == NULL) {
 		printf("ERROR: Could not open input file for reading.\n");
 		return -1;
 	}
+/*
 #ifdef _WIN32
 	_setmode(_fileno(in), _O_BINARY);
 #endif
+*/
 	printf("OK\n");
 
 	bmp_header = readbmpheader(in);
@@ -169,14 +171,16 @@ int main(int argc, char **argv) {
 		palette = NULL;
 
 	printf("Opening output file... ");
-	if((out = fopen(argv[2], "w")) == NULL) {
+	if((out = fopen(argv[2], "wb")) == NULL) {
 		printf("ERROR: Could not open output file for writing.\n");
 		fclose(in);
 		return -1;
 	}
+/*
 #ifdef _WIN32
 	_setmode(_fileno(out), _O_BINARY);
 #endif
+*/
 	printf("OK\n");
 	
 	fseek(in, bmp_header.offset, SEEK_SET);

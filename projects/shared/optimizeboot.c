@@ -30,7 +30,7 @@
 #include "defrag.h"
 #include "getsector.h"
 #include "mbr.h"
-#include "writembr.h"
+#include "mbrop.h"
 
 #define FILENAME	"C:\\magic.bin"
 
@@ -73,20 +73,20 @@ int CopyAtomic(LPCWSTR Source, LPCWSTR Dest) {
 	int bufsize;
 	char *buf;
 
-	if((SourceFp = _wfopen(Source, TEXT("r"))) == NULL) {
+	if((SourceFp = _wfopen(Source, TEXT("rb"))) == NULL) {
 		MessageBox(NULL, Source, TEXT("READ ERROR"), MB_OK);
 		return 0;
 	}
 
-	if((DestFp = _wfopen(Dest, TEXT("w"))) == NULL) {
+	if((DestFp = _wfopen(Dest, TEXT("wb"))) == NULL) {
 		MessageBox(NULL, Dest, TEXT("WRITE ERROR"), MB_OK);
 		fclose(SourceFp);
 		return 0;
 	}
-
+/*
 	_setmode(_fileno(SourceFp), _O_BINARY);
 	_setmode(_fileno(DestFp), _O_BINARY);
-
+*/
 	fseek(SourceFp, 0, SEEK_END);
 	bufsize = ftell(SourceFp);
 	fseek(SourceFp, 0, SEEK_SET);

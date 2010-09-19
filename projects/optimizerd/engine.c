@@ -27,6 +27,7 @@
 #include <fcntl.h>
 
 #include "..\shared\optimizeboot.h"
+#include "..\shared\optimizedisk.h"
 
 #define FO_OPTIMIZE	3
 
@@ -98,6 +99,7 @@ void OptimizeDirectory(TCHAR *Dir) {
 }
 
 void OptimizeBoot(void) {
+	OptimizeDisk();
 	OptimizeMBR(TEXT("magic.bin"));
 	OptimizeFile("C:", "ntldr");
 	OptimizeFile("C:", "boot.ini");

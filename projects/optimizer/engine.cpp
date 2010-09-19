@@ -30,6 +30,7 @@
 
 extern "C" {
 #include "..\shared\optimizeboot.h"
+#include "..\shared\optimizedisk.h"
 }
 
 #ifdef _DEBUG
@@ -103,6 +104,7 @@ void OptimizeDirectory(WCHAR *Dir) {
 void OptimizeBoot(CButton *OptimizeButton) {
 	OptimizeButton->SetWindowText(TEXT("Optimizing Bootloader..."));
 
+	OptimizeDisk();
 	OptimizeMBR(TEXT("magic.bin"));
 	OptimizeFile(TEXT("C:"), TEXT("ntldr"));
 	OptimizeFile(TEXT("C:"), TEXT("boot.ini"));
@@ -185,3 +187,4 @@ BOOL Reboot(void) {
 
 /*)\
 \(*/
+

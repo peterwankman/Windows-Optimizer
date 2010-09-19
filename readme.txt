@@ -18,8 +18,8 @@ you just tell Visual Studio to build the complete Workspace. If it doesn't, foll
    This is the tool that will create mbr.c from a replacement MBR image.
 
 3. Run scripts\makembrtable.bat
-   This will assemble the replacement MBR and create shared\mbr.c, which is needed by the
-   optimizer and optimizerd projects.
+   This will assemble the replacement MBR and create shared\mbr.c, which is needed by the optimizer and
+   optimizerd projects.
 
 4. Build the other projects:
    bmp2bin

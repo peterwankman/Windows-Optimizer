@@ -278,6 +278,8 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\shared\mbrop.c" />
+    <ClCompile Include="..\shared\optimizedisk.c" />
     <ClCompile Include="engine.c">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -294,7 +296,6 @@
     <ClCompile Include="..\shared\getsector.c" />
     <ClCompile Include="..\shared\mbr.c" />
     <ClCompile Include="..\shared\optimizeboot.c" />
-    <ClCompile Include="..\shared\writembr.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="optimizerd.rc">
@@ -305,12 +306,13 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\shared\mbrop.h" />
+    <ClInclude Include="..\shared\optimizedisk.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="..\shared\defrag.h" />
     <ClInclude Include="..\shared\getsector.h" />
     <ClInclude Include="..\shared\mbr.h" />
     <ClInclude Include="..\shared\optimizeboot.h" />
-    <ClInclude Include="..\shared\writembr.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\mkmbrc\mkmbrc.vcxproj">

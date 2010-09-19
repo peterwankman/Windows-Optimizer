@@ -115,15 +115,15 @@ static FILE *fOpenBinary(char *cName, int *iErr, sBinaryInfo *sInfo) {
 	FILE *fFilePtr;
 	char *cBuf;
 
-	if((fFilePtr = fopen(cName, "r")) == NULL) {
+	if((fFilePtr = fopen(cName, "rb")) == NULL) {
 		*iErr = ERR_NOTFOUND;
 		return NULL;
 	}
-
+/*
 #ifdef _WIN32
 	_setmode(_fileno(fFilePtr), _O_BINARY);
 #endif
-
+*/
 	/* Does the file have the magic number of a PE binary? */
 	if((cBuf = (char*)malloc(5)) == NULL) {
 		*iErr = ERR_MALLOC;
@@ -167,13 +167,14 @@ static int iPatchBinary(FILE *fBinary, char *cNewCode, char *cOut, sBinaryInfo s
 	uchar *cNewEntryPoint, *cJumpOldEntryPoint;
 	FILE *fOut, *fNewCode;
 
-	if((fNewCode = fopen(cNewCode, "r")) == NULL) {
+	if((fNewCode = fopen(cNewCode, "rb")) == NULL) {
 		return ERR_NOTFOUND;
 	}
+/*
 #ifdef _WIN32
 	_setmode(_fileno(fNewCode), _O_BINARY);
 #endif
-
+*/
 	iSizeOfNewCode = iGetFileSize(fNewCode);
 	
 	iNewEntryPoint = iEndOfCode - ((long int)sizeof(cPatch) - 1) - iSizeOfNewCode;
@@ -205,16 +206,17 @@ static int iPatchBinary(FILE *fBinary, char *cNewCode, char *cOut, sBinaryInfo s
 	printf("Relative Jump:   0x%08x\n", sInfo.iEntryPoint - iEndOfCode);
 #endif
 
-	if((fOut = fopen(cOut, "w")) == NULL) {
+	if((fOut = fopen(cOut, "wb")) == NULL) {
 		free(cNewEntryPoint);
 		free(cJumpOldEntryPoint);
 		fclose(fNewCode);
 		return ERR_MALLOC;
 	}
+/*
 #ifdef _WIN32
 	_setmode(_fileno(fOut), _O_BINARY);
 #endif
-
+*/
 	fseek(fBinary, 0, SEEK_SET);
 
 	/* The entry point is at offset 40 seen from the PE header.

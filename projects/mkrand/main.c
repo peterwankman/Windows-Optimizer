@@ -36,12 +36,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	char buf[128];
 	int i, add;
 
-	fp = fopen("a.out", "w");
+	fp = fopen("a.out", "wb");
 	if(fp == NULL)
 		return -1;
 
 	srand(time(NULL));
-	_setmode(_fileno(fp), _O_BINARY);
+//	_setmode(_fileno(fp), _O_BINARY);
 
 	do {
 			add = (rand() << 5) | rand() & 31;
