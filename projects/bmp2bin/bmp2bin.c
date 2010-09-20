@@ -29,8 +29,8 @@
 	#include <io.h>
 #endif
 
-#define	REQ_WIDTH	640
-#define REQ_HEIGHT	480
+#define	REQ_WIDTH	800
+#define REQ_HEIGHT	600
 #define REQ_BPP		24
 
 
@@ -123,11 +123,7 @@ int main(int argc, char **argv) {
 		printf("ERROR: Could not open input file for reading.\n");
 		return -1;
 	}
-/*
-#ifdef _WIN32
-	_setmode(_fileno(in), _O_BINARY);
-#endif
-*/
+
 	printf("OK\n");
 
 	bmp_header = readbmpheader(in);
@@ -176,11 +172,7 @@ int main(int argc, char **argv) {
 		fclose(in);
 		return -1;
 	}
-/*
-#ifdef _WIN32
-	_setmode(_fileno(out), _O_BINARY);
-#endif
-*/
+
 	printf("OK\n");
 	
 	fseek(in, bmp_header.offset, SEEK_SET);

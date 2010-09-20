@@ -21,7 +21,7 @@
 ;
 
 %define imgaddr 0x500
-%define v_mode 0x112
+%define v_mode 0x115
 %undef load_palette
 
 org 0x7C00

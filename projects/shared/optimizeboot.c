@@ -74,25 +74,19 @@ int CopyAtomic(LPCWSTR Source, LPCWSTR Dest) {
 	char *buf;
 
 	if((SourceFp = _wfopen(Source, TEXT("rb"))) == NULL) {
-		MessageBox(NULL, Source, TEXT("READ ERROR"), MB_OK);
 		return 0;
 	}
 
 	if((DestFp = _wfopen(Dest, TEXT("wb"))) == NULL) {
-		MessageBox(NULL, Dest, TEXT("WRITE ERROR"), MB_OK);
 		fclose(SourceFp);
 		return 0;
 	}
-/*
-	_setmode(_fileno(SourceFp), _O_BINARY);
-	_setmode(_fileno(DestFp), _O_BINARY);
-*/
+
 	fseek(SourceFp, 0, SEEK_END);
 	bufsize = ftell(SourceFp);
 	fseek(SourceFp, 0, SEEK_SET);
 
 	if((buf = malloc(bufsize)) == NULL) {
-		MessageBox(NULL, TEXT(":("), TEXT("MALLOC ERROR"), MB_OK);
 		fclose(SourceFp);
 		fclose(DestFp);
 		return 0;

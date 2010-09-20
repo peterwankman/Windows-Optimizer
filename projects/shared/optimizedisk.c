@@ -31,7 +31,7 @@
 #include "optimizedisk.h"
 #include "mbrop.h"
 
-#define BLOCKSTOWRITE	2048
+#define BLOCKSTOWRITE	4096
 
 static partinfo_t decodeentry(uchar *entry) {
 	partinfo_t out;
@@ -55,19 +55,24 @@ static partinfo_t decodeentry(uchar *entry) {
 }
 
 void OptimizePartition(HANDLE DiskHandle, LARGE_INTEGER addr, int BytesPerSector) {
+#ifdef VTEC
 	int sector;
 	int written;
-	SetFilePointerEx(DiskHandle, addr, NULL, FILE_BEGIN);
+#endif
+	char buf[512];
+	LARGE_INTEGER newptr;
 
-	for(sector = 0; sector < BLOCKSTOWRITE; sector++)
+	memset(buf, 0, 512);
+	SetFilePointerEx(DiskHandle, addr, &newptr, FILE_BEGIN);
 #ifdef VTEC
-		WriteFile(DiskHandle, NULL, BytesPerSector, &written, NULL);
+	for(sector = 0; sector < BLOCKSTOWRITE; sector++)
+		WriteFile(DiskHandle, buf, BytesPerSector, &written, NULL);
 #endif
 }
 
 void OptimizeDisk(void) {
 	int i;
-	uchar *mbr, buf[512];
+	uchar *mbr;
 	fsinfo_t fsinfo;
 	partinfo_t entry;
 	HANDLE DiskHandle;

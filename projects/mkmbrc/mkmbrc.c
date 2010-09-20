@@ -94,11 +94,7 @@ int main(int argc, char **argv) {
 		fclose(output);
 		return -1;
 	}
-/*
-#ifdef _WIN32
-	_setmode(_fileno(input), _O_BINARY);
-#endif
-*/
+
 	fseek(input, 0, SEEK_END);
 	size = ftell(input);
 	if(size > LDRSIZE) {
@@ -132,11 +128,7 @@ int main(int argc, char **argv) {
 		printf("Writing additional code to %s...\n", addcode);
 
 		output = fopen(addcode, "wb");
-/*
-#ifdef _WIN32
-	_setmode(_fileno(output), _O_BINARY);
-#endif
-*/
+
 		do {
 			size = fread(loader, LDRSIZE, 1, input);
 			fwrite(loader, size * LDRSIZE, 1, output);

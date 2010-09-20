@@ -41,7 +41,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		return -1;
 
 	srand(time(NULL));
-//	_setmode(_fileno(fp), _O_BINARY);
 
 	do {
 			add = (rand() << 5) | rand() & 31;
