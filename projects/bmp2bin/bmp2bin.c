@@ -29,8 +29,8 @@
 	#include <io.h>
 #endif
 
-#define	REQ_WIDTH	800
-#define REQ_HEIGHT	600
+#define	REQ_WIDTH	640
+#define REQ_HEIGHT	480
 #define REQ_BPP		24
 
 

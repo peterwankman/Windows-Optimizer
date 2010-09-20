@@ -17,11 +17,11 @@
 ; along with this program; if not, write to 
 ; the Free Software Foundation, Inc.
 ; 51 Franklin Street, Fifth Floor
-; Boston, MA  02110-1301, US
+; Boston, MA  02110-1301, USA
 ;
 
 %define imgaddr 0x500
-%define v_mode 0x115
+%define v_mode 0x112
 %undef load_palette
 
 org 0x7C00
@@ -195,9 +195,12 @@ mov ax, 0x4F01
 int 0x10
 mov ax, [es:0x04] 
 shl ax, 10 
+jnc probe_video2
+mov ax, 0xffff
+probe_video2:
 mov [sv_offset_max], ax
-mov al, [es:0x1A]
-mov [sv_page_max], al
+mov ax, [es:0x1A]
+mov [sv_page_max], ax
 mov ax, [es:0x08]
 cmp ax, 0x0000
 jz probe_video_done
@@ -215,23 +218,8 @@ call putmpx
 cmp ax, 0
 jz load_gfx
 
-in al, 0x61
-or al, 0x03
-out 0x61, al
-
-party_hard:
-mov bx, audio1
-party_loop:
-mov ax, [bx]
-add bx, 2
-mov cx, [bx]
-add bx, 2
-push bx
-call audio_play
-pop bx
-cmp bx, audio_end
-jnz party_loop
-jmp party_hard
+ende:
+jmp ende
 
 putmpx:
 xor bx, bx
@@ -280,9 +268,8 @@ push bx
 push ax
 xor bx, bx
 mov cx, [sv_offset]
-mov dx, [ds:sv_page]
+mov dx, [sv_page]
 mov ax, [sv_seg]
-
 mov es, ax
 cmp cx, 0
 jnz putpx_start
@@ -293,7 +280,6 @@ mov si, cx
 pop ax
 mov [es:si], al
 xor ax, ax
-inc cx
 mov bx, [sv_offset_max]
 cmp cx, bx
 jnz putpx_done
@@ -301,10 +287,13 @@ xor cx, cx
 inc dx
 mov bx, [sv_page_max]
 cmp dx, bx
-jnz putpx_done
+jnz putpx_done_ni
 xor dx, dx
 mov ax, 1
+jmp putpx_done_ni
 putpx_done:
+inc cx
+putpx_done_ni:
 mov [sv_offset], cx
 mov [sv_page], dx
 pop bx
@@ -316,33 +305,12 @@ jnz putmpx_do
 putmpx_done:
 retn
 
-audio_play:
-push cx
-mov cx, ax 
-mov al, 0xb6
-out 0x43, al
-mov dx, 0x14
-mov ax, 0x4F38
-div cx
-out 0x42, al
-mov al, ah
-out 0x42, al
-mov ax, 0x8600
-pop cx
-xor dx, dx
-int 0x15
-retn
-
 palette_count	dw	0x0
 sv_seg          dw      0xA000
 sv_offset       dw      0x0
 sv_page         dw      0x0
 sv_offset_max   dw      0x0
 sv_page_max     dw      0x0
-
-audio1 dw 659, 80, 587, 80, 494, 40, 523, 40, 587, 80, 494, 40, 523, 40, 587, 80, 523, 40, 494, 40, 440, 80
-audio2 dw 659, 40, 659, 40, 587, 40, 587, 40, 494, 40, 523, 40, 587, 80, 494, 40, 523, 40, 587, 80, 523, 40, 494, 40, 440, 80
-audio_end dw 0
 
 section .endblock start=0x7FFF
 endb db 0x0
