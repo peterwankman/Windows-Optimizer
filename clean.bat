@@ -40,3 +40,4 @@ del /q etc\loader.lst
 del /q etc\stage2.bin
 
 rd /q /s optimizer%VER%
+rd /q /s ipch
