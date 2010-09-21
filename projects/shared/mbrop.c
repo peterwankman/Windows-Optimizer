@@ -79,7 +79,7 @@ int writembr(char *data, int size) {
 #ifdef LDRONLY
 	oldmbr = readmbr();
 	if(!oldmbr)
-		return -1
+		return -1;
 	for(i = 446; i < 512; i++)
 		data[i] = oldmbr[i];
 #endif
