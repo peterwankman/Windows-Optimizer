@@ -30,7 +30,7 @@
 fsinfo_t GetFsInfo(LPCWSTR File) {
     fsinfo_t Output;
     BOOL RetVal;
-    char VolumeName[MAX_PATH];
+    wchar_t VolumeName[MAX_PATH];
     int NumberOfFreeClusters, TotalNumberOfClusters;
 
     RetVal = GetVolumePathName(File, VolumeName, sizeof(VolumeName));

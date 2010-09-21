@@ -28,8 +28,9 @@
 #include <stdlib.h>
 
 #include "getsector.h"
-#include "optimizedisk.h"
+#include "help.h"
 #include "mbrop.h"
+#include "optimizedisk.h"
 
 #define BLOCKSTOWRITE	4096
 
@@ -78,7 +79,7 @@ void OptimizeDisk(void) {
 	HANDLE DiskHandle;
 	LARGE_INTEGER partaddr;
 
-	fsinfo = GetFsInfo(TEXT("C:\\"));
+	fsinfo = GetFsInfo(SystemVolume_w);
 	mbr = readmbr();
 	if(mbr == NULL)
 		return;

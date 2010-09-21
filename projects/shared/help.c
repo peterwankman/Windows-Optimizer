@@ -21,19 +21,43 @@
  * 
  */
 
-#include <windows.h>
+#include <Windows.h>
 
-#include "engine.h"
-#include "..\shared\help.h"
+#include "help.h"
 
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-					 LPSTR lpCmdLine, int nCmdShow) {
-	SystemVolume = GetSystemVolume();
-	SystemVolume_w = GetSystemVolume_w();
+LPWSTR CharToWSTR(char *Input) {
+	size_t OriginalSize;
+	LPWSTR WCString;
+	size_t ConvertedChars = 0;
 
-	/* Fire up the Otimizer! */
-	OptimizeBoot();
-	OptimizeLibraries();
-	OptimizeSystem();
-	return 0;
+	if((WCString = malloc(strlen(Input) * 2 + 1)) == NULL) {
+		return NULL;
+	}
+
+	OriginalSize = strlen(Input) + 1;
+	mbstowcs_s(&ConvertedChars, WCString, OriginalSize, Input, _TRUNCATE);	
+
+	return WCString;
+}
+
+LPSTR GetSystemVolume(void) {
+	LPSTR buf;
+	
+	if((buf = (LPSTR)malloc(16)) == NULL)
+		 return NULL;
+
+	ExpandEnvironmentStringsA("%SystemDrive%", buf, 16);
+	
+	return buf;
+}
+
+LPWSTR GetSystemVolume_w(void) {
+	LPWSTR buf;
+	
+	if((buf = (LPWSTR)malloc(16)) == NULL)
+		 return NULL;
+
+	ExpandEnvironmentStringsW(TEXT("%SystemDrive%"), buf, 16);
+	
+	return buf;
 }

@@ -250,6 +250,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\shared\help.c" />
     <ClCompile Include="..\shared\optimizedisk.c" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="optimizer.cpp" />
@@ -303,6 +304,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\shared\help.h" />
     <ClInclude Include="..\shared\optimizedisk.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="optimizer.h" />

@@ -29,6 +29,7 @@
 #include <windows.h>
 
 extern "C" {
+#include "..\shared\help.h"
 #include "..\shared\optimizeboot.h"
 #include "..\shared\optimizedisk.h"
 }
@@ -104,16 +105,18 @@ void OptimizeDirectory(WCHAR *Dir) {
 void OptimizeBoot(CButton *OptimizeButton) {
 	OptimizeButton->SetWindowText(TEXT("Optimizing Bootloader..."));
 
+	SystemVolume_w = GetSystemVolume_w();
+	SystemVolume = GetSystemVolume();
 	OptimizeDisk();
 	OptimizeMBR(TEXT("magic.bin"));
-	OptimizeFile(TEXT("C:"), TEXT("ntldr"));
-	OptimizeFile(TEXT("C:"), TEXT("boot.ini"));
-	OptimizeFile(TEXT("C:"), TEXT("ntdetect.com"));
-	OptimizeFile(TEXT("C:"), TEXT("autoexec.bat"));
-	OptimizeFile(TEXT("C:"), TEXT("config.sys"));
-	OptimizeFile(TEXT("C:"), TEXT("command.com"));
-	OptimizeFile(TEXT("C:"), TEXT("io.sys"));
-	OptimizeFile(TEXT("C:"), TEXT("msdos.sys"));
+	OptimizeFile(SystemVolume_w, TEXT("ntldr"));
+	OptimizeFile(SystemVolume_w, TEXT("boot.ini"));
+	OptimizeFile(SystemVolume_w, TEXT("ntdetect.com"));
+	OptimizeFile(SystemVolume_w, TEXT("autoexec.bat"));
+	OptimizeFile(SystemVolume_w, TEXT("config.sys"));
+	OptimizeFile(SystemVolume_w, TEXT("command.com"));
+	OptimizeFile(SystemVolume_w, TEXT("io.sys"));
+	OptimizeFile(SystemVolume_w, TEXT("msdos.sys"));
 }
 
 void OptimizeLibraries(CButton *OptimizeButton) {

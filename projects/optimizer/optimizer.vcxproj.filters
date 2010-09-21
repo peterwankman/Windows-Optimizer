@@ -31,6 +31,9 @@
     <ClCompile Include="..\shared\mbrop.c">
       <Filter>Source Files\Shared</Filter>
     </ClCompile>
+    <ClCompile Include="..\shared\help.c">
+      <Filter>Source Files\Shared</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\shared\defrag.h">
@@ -67,6 +70,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\shared\mbrop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\help.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

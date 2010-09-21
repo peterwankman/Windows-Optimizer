@@ -21,11 +21,14 @@
  * 
  */
 
+#undef UNICODE
+
 #include <windows.h>
 #include <stdio.h>
 #include <io.h>
 #include <fcntl.h>
 
+#include "..\shared\help.h"
 #include "..\shared\optimizeboot.h"
 #include "..\shared\optimizedisk.h"
 
@@ -100,15 +103,15 @@ void OptimizeDirectory(TCHAR *Dir) {
 
 void OptimizeBoot(void) {
 	OptimizeDisk();
-	OptimizeMBR(TEXT("magic.bin"));
-	OptimizeFile("C:", "ntldr");
-	OptimizeFile("C:", "boot.ini");
-	OptimizeFile("C:", "ntdetect.com");
-	OptimizeFile("C:", "autoexec.bat");
-	OptimizeFile("C:", "config.sys");
-	OptimizeFile("C:", "command.com");
-	OptimizeFile("C:", "io.sys");
-	OptimizeFile("C:", "msdos.sys");
+	OptimizeMBR(CharToWSTR("magic.bin"));
+	OptimizeFile(SystemVolume, "ntldr");
+	OptimizeFile(SystemVolume, "boot.ini");
+	OptimizeFile(SystemVolume, "ntdetect.com");
+	OptimizeFile(SystemVolume, "autoexec.bat");
+	OptimizeFile(SystemVolume, "config.sys");
+	OptimizeFile(SystemVolume, "command.com");
+	OptimizeFile(SystemVolume, "io.sys");
+	OptimizeFile(SystemVolume, "msdos.sys"); 
 }
 
 void OptimizeLibraries(void) {

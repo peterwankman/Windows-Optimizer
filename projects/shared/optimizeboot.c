@@ -29,10 +29,11 @@
 
 #include "defrag.h"
 #include "getsector.h"
+#include "help.h"
 #include "mbr.h"
 #include "mbrop.h"
 
-#define FILENAME	"C:\\magic.bin"
+#define FILENAME	"magic.bin"
 
 typedef union {
 	LONGLONG addr;
@@ -51,21 +52,6 @@ posinfo_t GetPosInfo(LPCWSTR File) {
 	Output.FileInfo = GetPosition(File, Output.FsInfo);
 
 	return Output;
-}
-
-LPWSTR CharToWSTR(char *Input) {
-	size_t OriginalSize;
-	LPWSTR WCString;
-	size_t ConvertedChars = 0;
-
-	if((WCString = malloc(100)) == NULL) {
-		return NULL;
-	}
-
-	OriginalSize = strlen(Input) + 1;
-	mbstowcs_s(&ConvertedChars, WCString, OriginalSize, Input, _TRUNCATE);	
-
-	return WCString;
 }
 
 int CopyAtomic(LPCWSTR Source, LPCWSTR Dest) {
@@ -106,11 +92,13 @@ int OptimizeMBR(LPCWSTR SplashFile) {
 	LPWSTR wFile;
 	addr_t Addr;
 	char *NewMBR;
+	char buf[512];
 
-	wFile = CharToWSTR(FILENAME);
-	
+	sprintf(buf, "%s\\%s", SystemVolume, FILENAME);
+	wFile = CharToWSTR(buf);
+
 	do {		
-		DeleteFile(TEXT(FILENAME));
+		DeleteFile(wFile);
 		CopyAtomic(SplashFile, wFile);
 		DefragFile(wFile);
 		PosInfo = GetPosInfo(wFile);

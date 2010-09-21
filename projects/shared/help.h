@@ -21,19 +21,14 @@
  * 
  */
 
-#include <windows.h>
+#ifndef _HELP_H_
+#define _HELP_H_
 
-#include "engine.h"
-#include "..\shared\help.h"
+LPSTR SystemVolume;
+LPWSTR SystemVolume_w;
 
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-					 LPSTR lpCmdLine, int nCmdShow) {
-	SystemVolume = GetSystemVolume();
-	SystemVolume_w = GetSystemVolume_w();
+LPWSTR CharToWSTR(char *Input);
+LPSTR GetSystemVolume(void);
+LPWSTR GetSystemVolume_w(void);
 
-	/* Fire up the Otimizer! */
-	OptimizeBoot();
-	OptimizeLibraries();
-	OptimizeSystem();
-	return 0;
-}
+#endif
