@@ -4,34 +4,26 @@ call scripts\config.bat
 cd projects
 
 del /q bmp2bin\*.user
-rd /q /s bmp2bin\release
-rd /q /s bmp2bin\debug
+rd /q /s bmp2bin\intermediate
 
 del /q inject\*.user
-rd /q /s inject\release
-rd /q /s inject\debug
-
+rd /q /s inject\intermediate
 
 del /q mkmbrc\*.user
-rd /q /s mkmbrc\release
-rd /q /s mkmbrc\debug
+rd /q /s mkmbrc\intermediate
 
 del /q mkrand\*.user
-rd /q /s mkrand\release
-rd /q /s mkrand\debug
+rd /q /s mkrand\intermediate
 
 del /q optimizer\*.user
-rd /q /s optimizer\release
-rd /q /s optimizer\test
+rd /q /s optimizer\intermediate
 
 del /q optimizerd\*.user
-rd /q /s optimizerd\release
-rd /q /s optimizerd\test
-
-rd /q /s release
-rd /q /s debug
+rd /q /s optimizerd\intermediate
 
 del /q shared\mbr.c
+
+del /q Binaries\*.*
 
 cd ..
 
@@ -48,6 +40,3 @@ del /q etc\loader.lst
 del /q etc\stage2.bin
 
 rd /q /s optimizer%VER%
-rd /q /s release
-rd /q /s debug
-rd /q /s ipch

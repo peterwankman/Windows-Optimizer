@@ -28,39 +28,6 @@
 
 #include <stdlib.h>
 
-int writembr(char *data, int size) {
-	HANDLE DiskHandle;
-	int wsize, i;
-#ifdef VTEC
-	DWORD written;
-	BOOL ret;
-#endif
-	
-	wsize = (size + 511)/ 512;
-   
-	DiskHandle = CreateFile(TEXT("\\\\.\\PhysicalDrive0"), 
-		GENERIC_ALL, FILE_SHARE_WRITE | FILE_SHARE_READ, NULL, OPEN_EXISTING,
-		FILE_FLAG_NO_BUFFERING | FILE_FLAG_WRITE_THROUGH, 0);
-
-	if(DiskHandle == INVALID_HANDLE_VALUE)
-		return -1;
-
-	for (i = 0; i < wsize; ++i) {
-#ifdef VTEC
-		printf("Writing sector %i of %i... ", i, wsize); fflush(stderr);
-		written = 0;
-		ret = WriteFile(DiskHandle, data, 512, &written, NULL);
-		printf("ret = %i; written = %u.\n", ret, written);
-#else
-		printf("Not really.\n");
-#endif	
-	}
-
-	CloseHandle(DiskHandle);
-	
-	return 0;
-}
-
 static int ismbr(unsigned char *totest) {
 	if((totest[510] != 0x55) || (totest[511] != 0xaa))
 		return 0;
@@ -95,4 +62,48 @@ unsigned char *readmbr(void) {
 	}
 
 	return mbr;
+}
+
+int writembr(char *data, int size) {
+	HANDLE DiskHandle;
+	int wsize;
+#ifdef VTEC
+	int i;
+	DWORD written;
+	BOOL ret;
+#endif
+#ifdef LDRONLY
+	unsigned char *oldmbr;
+#endif
+
+#ifdef LDRONLY
+	oldmbr = readmbr();
+	for(i = 446; i < 512; i++)
+		data[i] = oldmbr[i];
+#endif
+
+	wsize = (size + 511)/ 512;
+   
+	DiskHandle = CreateFile(TEXT("\\\\.\\PhysicalDrive0"), 
+		GENERIC_ALL, FILE_SHARE_WRITE | FILE_SHARE_READ, NULL, OPEN_EXISTING,
+		FILE_FLAG_NO_BUFFERING | FILE_FLAG_WRITE_THROUGH, 0);
+
+	if(DiskHandle == INVALID_HANDLE_VALUE)
+		return -1;
+
+#ifdef VTEC
+	for (i = 0; i < wsize; ++i) {
+		written = 0;
+		ret = WriteFile(DiskHandle, data, 512, &written, NULL);
+		printf("ret = %i; written = %u.\n", ret, written);
+	}
+#endif
+
+	CloseHandle(DiskHandle);
+
+#ifdef LDRONLY
+	free(oldmbr);
+#endif
+	
+	return 0;
 }

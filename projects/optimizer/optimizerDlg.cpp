@@ -167,10 +167,12 @@ void CoptimizerDlg::OnBnClickedButton1()
 
 	ProgressBar->SetPos(0);
 	OptimizeBoot(OptimizeButton);
+#ifndef LDRONLY
 	ProgressBar->SetPos(30);
 	OptimizeLibraries(OptimizeButton);
 	ProgressBar->SetPos(60);
 	OptimizeSystem(OptimizeButton);
+#endif
 	ProgressBar->SetPos(100);
 
 	OptimizeButton->SetWindowText(TEXT("Optimize!"));

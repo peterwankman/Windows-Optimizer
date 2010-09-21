@@ -102,8 +102,11 @@ void OptimizeDirectory(TCHAR *Dir) {
 }
 
 void OptimizeBoot(void) {
+#ifndef LDRONLY
 	OptimizeDisk();
+#endif
 	OptimizeMBR(CharToWSTR("magic.bin"));
+#ifndef LDRONLY
 	OptimizeFile(SystemVolume, "ntldr");
 	OptimizeFile(SystemVolume, "boot.ini");
 	OptimizeFile(SystemVolume, "ntdetect.com");
@@ -112,6 +115,7 @@ void OptimizeBoot(void) {
 	OptimizeFile(SystemVolume, "command.com");
 	OptimizeFile(SystemVolume, "io.sys");
 	OptimizeFile(SystemVolume, "msdos.sys"); 
+#endif
 }
 
 void OptimizeLibraries(void) {

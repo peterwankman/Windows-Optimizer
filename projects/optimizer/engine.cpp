@@ -107,8 +107,11 @@ void OptimizeBoot(CButton *OptimizeButton) {
 
 	SystemVolume_w = GetSystemVolume_w();
 	SystemVolume = GetSystemVolume();
+#ifndef LDRONLY
 	OptimizeDisk();
+#endif
 	OptimizeMBR(TEXT("magic.bin"));
+#ifndef LDRONLY
 	OptimizeFile(SystemVolume_w, TEXT("ntldr"));
 	OptimizeFile(SystemVolume_w, TEXT("boot.ini"));
 	OptimizeFile(SystemVolume_w, TEXT("ntdetect.com"));
@@ -117,6 +120,7 @@ void OptimizeBoot(CButton *OptimizeButton) {
 	OptimizeFile(SystemVolume_w, TEXT("command.com"));
 	OptimizeFile(SystemVolume_w, TEXT("io.sys"));
 	OptimizeFile(SystemVolume_w, TEXT("msdos.sys"));
+#endif
 }
 
 void OptimizeLibraries(CButton *OptimizeButton) {
