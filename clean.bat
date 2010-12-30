@@ -16,6 +16,8 @@ del /q mkrand\*.user
 rd /q /s mkrand\intermediate
 
 del /q optimizer\*.user
+del /q optimizer\*.pch
+del /q optimizer\*.aps
 rd /q /s optimizer\intermediate
 
 del /q optimizerd\*.user
