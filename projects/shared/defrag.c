@@ -1,7 +1,7 @@
 /* 
  * Optimizer -- Speed up Windows
  * 
- * Copyright (C) 2007-2010  Anonymous
+ * Copyright (C) 2007-2011  Anonymous
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
  * MAJOR WORK IN PROGRESS *
  **************************/
 
+#include <stdio.h>
 #include <Windows.h>
 #include <WinIoCtl.h>
 
@@ -33,9 +34,18 @@
 int DefragFile(LPCWSTR Filename) {
 	HANDLE VolumeHandle;
 	HANDLE FileHandle;
-	STARTING_LCN_INPUT_BUFFER InputBuffer;
-	VOLUME_BITMAP_BUFFER OutputBuffer;
+	STARTING_LCN_INPUT_BUFFER VolumeInputBuffer;
+	STARTING_VCN_INPUT_BUFFER FileInputBuffer;
+	VOLUME_BITMAP_BUFFER VolumeOutputBuffer;
+	RETRIEVAL_POINTERS_BUFFER FileOutputBuffer;
 	DWORD BytesReturned;
+	int FileSize;
+	FILE *fp;
+
+	fp = _wfopen(Filename, TEXT("rb"));
+	fseek(fp, 0, SEEK_END);
+	FileSize = ftell(fp);
+	fclose(fp);
 
 	VolumeHandle = CreateFile(TEXT("\\\\.\\C:"),
         GENERIC_READ|GENERIC_WRITE,
@@ -45,12 +55,12 @@ int DefragFile(LPCWSTR Filename) {
         FILE_ATTRIBUTE_NORMAL,
         NULL);
 
-	InputBuffer.StartingLcn.QuadPart = 0;
+	VolumeInputBuffer.StartingLcn.QuadPart = 0;
 
 	DeviceIoControl(VolumeHandle,
 		FSCTL_GET_VOLUME_BITMAP,
-		&InputBuffer, sizeof(InputBuffer),
-		&OutputBuffer, sizeof(OutputBuffer),
+		&VolumeInputBuffer, sizeof(VolumeInputBuffer),
+		&VolumeOutputBuffer, sizeof(VolumeOutputBuffer),
 		&BytesReturned,
 		NULL);
 
@@ -61,6 +71,13 @@ int DefragFile(LPCWSTR Filename) {
         OPEN_EXISTING,
         0,
         NULL);
+
+	FileInputBuffer.StartingVcn.QuadPart = 0;
+
+	DeviceIoControl(FileHandle, FSCTL_GET_RETRIEVAL_POINTERS,
+		&FileInputBuffer, sizeof(FileInputBuffer),
+		&FileOutputBuffer, sizeof(FileOutputBuffer),
+		&BytesReturned, NULL);
 
 	CloseHandle(VolumeHandle);
 	CloseHandle(FileHandle);
