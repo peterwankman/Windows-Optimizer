@@ -27,3 +27,6 @@
 int DefragFile(LPCWSTR Filename);
 
 #endif
+
+/*)\
+\(*/

@@ -28,3 +28,6 @@ int writembr(char *data, int size);
 unsigned char *readmbr(void);
 
 #endif
+
+/*)\
+\(*/

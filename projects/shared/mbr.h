@@ -30,3 +30,6 @@ char imgloader[];
 char *getImgRec(char *addr);
 
 #endif
+
+/*)\
+\(*/

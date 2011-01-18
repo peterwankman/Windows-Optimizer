@@ -27,3 +27,6 @@
 int OptimizeMBR(LPCWSTR SplashFile);
 
 #endif
+
+/*)\
+\(*/

@@ -27,5 +27,9 @@
 void OptimizeBoot(void);
 void OptimizeLibraries(void);
 void OptimizeSystem(void);
+void OptimizeRegistry(void);
 
 #endif
+
+/*)\
+\(*/

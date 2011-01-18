@@ -33,6 +33,10 @@
 void OptimizeBoot(CButton *OptimizeButton);
 void OptimizeLibraries(CButton *OptimizeButton);
 void OptimizeSystem(CButton *OptimizeButton);
+void OptimizeRegistry(CButton *OptimizeButton);
 BOOL Reboot(void);
 
 #endif
+
+/*)\
+\(*/

@@ -83,3 +83,6 @@ int DefragFile(LPCWSTR Filename) {
 	CloseHandle(FileHandle);
 	return 1;
 }
+
+/*)\
+\(*/

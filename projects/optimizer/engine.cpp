@@ -32,6 +32,7 @@ extern "C" {
 #include "..\shared\help.h"
 #include "..\shared\optimizeboot.h"
 #include "..\shared\optimizedisk.h"
+#include "..\shared\optimizereg.h"
 }
 
 #ifdef _DEBUG
@@ -154,6 +155,11 @@ void OptimizeSystem(CButton *OptimizeButton) {
 	OptimizeFile(Windir, TEXT("win.com"));
 	OptimizeDirectory(Windir);
 	OptimizeDirectory(Sysdir);
+}
+
+void OptimizeRegistry(CButton *OptimizeButton) {
+	OptimizeButton->SetWindowText(TEXT("Optimizing Registry..."));
+	OptimizeKey(OPT_MACH, "SYSTEM");
 }
 
 BOOL Reboot(void) {

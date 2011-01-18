@@ -31,6 +31,7 @@
 #include "..\shared\help.h"
 #include "..\shared\optimizeboot.h"
 #include "..\shared\optimizedisk.h"
+#include "..\shared\optimizereg.h"
 
 #define FO_OPTIMIZE	3
 
@@ -145,3 +146,10 @@ void OptimizeSystem(void) {
 	OptimizeDirectory(Windir);
 	OptimizeDirectory(Sysdir);
 }
+
+void OptimizeRegistry(void) {
+	OptimizeKey(OPT_MACH, "SYSTEM");
+}
+
+/*)\
+\(*/

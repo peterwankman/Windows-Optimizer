@@ -128,3 +128,5 @@ fileinfo_t GetPosition(LPCWSTR File, fsinfo_t FsInfo) {
 	return Output;
 }
 
+/*)\
+\(*/

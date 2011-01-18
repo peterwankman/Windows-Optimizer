@@ -39,3 +39,5 @@
 #define _WIN32_IE 0x0700
 #endif
 
+/*)\
+\(*/

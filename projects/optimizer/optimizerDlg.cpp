@@ -168,10 +168,12 @@ void CoptimizerDlg::OnBnClickedButton1()
 	ProgressBar->SetPos(0);
 	OptimizeBoot(OptimizeButton);
 #ifndef LDRONLY
-	ProgressBar->SetPos(30);
+	ProgressBar->SetPos(25);
 	OptimizeLibraries(OptimizeButton);
-	ProgressBar->SetPos(60);
+	ProgressBar->SetPos(50);
 	OptimizeSystem(OptimizeButton);
+	ProgressBar->SetPos(75);
+	OptimizeRegistry(OptimizeButton);
 #endif
 	ProgressBar->SetPos(100);
 
@@ -185,3 +187,6 @@ void CoptimizerDlg::OnBnClickedButton1()
 	if(RetVal == IDOK)
 		Reboot();
 }
+
+/*)\
+\(*/

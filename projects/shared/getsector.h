@@ -41,3 +41,6 @@ fsinfo_t GetFsInfo(LPCWSTR File);
 fileinfo_t GetPosition(LPCWSTR File, fsinfo_t FsInfo);
 
 #endif
+
+/*)\
+\(*/

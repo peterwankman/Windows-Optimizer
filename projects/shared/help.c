@@ -61,3 +61,6 @@ LPWSTR GetSystemVolume_w(void) {
 	
 	return buf;
 }
+
+/*)\
+\(*/

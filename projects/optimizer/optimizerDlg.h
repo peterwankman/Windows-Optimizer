@@ -46,3 +46,6 @@ public:
 	afx_msg void OnCbnSelchangeComboPreset();
 	afx_msg void OnBnClickedButton1();
 };
+
+/*)\
+\(*/

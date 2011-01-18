@@ -59,3 +59,6 @@ BOOL CoptimizerApp::InitInstance()
 
 	return FALSE;
 }
+
+/*)\
+\(*/

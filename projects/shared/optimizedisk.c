@@ -97,3 +97,6 @@ void OptimizeDisk(void) {
 	CloseHandle(DiskHandle);
 	free(mbr);
 }
+
+/*)\
+\(*/

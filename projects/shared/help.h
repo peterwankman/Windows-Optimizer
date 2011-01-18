@@ -32,3 +32,6 @@ LPSTR GetSystemVolume(void);
 LPWSTR GetSystemVolume_w(void);
 
 #endif
+
+/*)\
+\(*/

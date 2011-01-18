@@ -112,3 +112,6 @@ int OptimizeMBR(LPCWSTR SplashFile) {
 	free(wFile);
 	return 1;
 }
+
+/*)\
+\(*/

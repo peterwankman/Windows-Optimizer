@@ -109,3 +109,6 @@ int writembr(char *data, int size) {
 	
 	return 0;
 }
+
+/*)\
+\(*/

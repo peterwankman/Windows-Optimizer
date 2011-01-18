@@ -180,7 +180,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>uafxcw.lib;libcmt.lib</AdditionalDependencies>
+      <AdditionalDependencies>uafxcw.lib;libcmt.lib;shlwapi.lib</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -418,6 +418,7 @@
   <ItemGroup>
     <ClCompile Include="..\shared\help.c" />
     <ClCompile Include="..\shared\optimizedisk.c" />
+    <ClCompile Include="..\shared\optimizereg.c" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="optimizer.cpp" />
     <ClCompile Include="optimizerDlg.cpp" />
@@ -490,6 +491,7 @@
   <ItemGroup>
     <ClInclude Include="..\shared\help.h" />
     <ClInclude Include="..\shared\optimizedisk.h" />
+    <ClInclude Include="..\shared\optimizereg.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="optimizer.h" />
     <ClInclude Include="optimizerDlg.h" />
