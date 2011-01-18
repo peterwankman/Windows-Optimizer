@@ -34,9 +34,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	/* Fire up the Otimizer! */
 	OptimizeBoot();
 #ifndef LDRONLY
-	OptimizeLibraries();
-	OptimizeSystem();
 	OptimizeRegistry();
+	OptimizeLibraries();
+	OptimizeSystem();	
 #endif
 	return 0;
 }

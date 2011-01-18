@@ -169,11 +169,11 @@ void CoptimizerDlg::OnBnClickedButton1()
 	OptimizeBoot(OptimizeButton);
 #ifndef LDRONLY
 	ProgressBar->SetPos(25);
-	OptimizeLibraries(OptimizeButton);
-	ProgressBar->SetPos(50);
-	OptimizeSystem(OptimizeButton);
-	ProgressBar->SetPos(75);
 	OptimizeRegistry(OptimizeButton);
+	ProgressBar->SetPos(50);
+	OptimizeLibraries(OptimizeButton);
+	ProgressBar->SetPos(75);
+	OptimizeSystem(OptimizeButton);
 #endif
 	ProgressBar->SetPos(100);
 
