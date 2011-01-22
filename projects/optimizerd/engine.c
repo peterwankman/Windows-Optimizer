@@ -149,6 +149,7 @@ void OptimizeSystem(void) {
 
 void OptimizeRegistry(void) {
 	OptimizeKey(OPT_MACH, "SYSTEM");
+	OptimizeKey(OPT_CURR, "Software");
 }
 
 /*)\

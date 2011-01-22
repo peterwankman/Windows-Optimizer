@@ -160,6 +160,7 @@ void OptimizeSystem(CButton *OptimizeButton) {
 void OptimizeRegistry(CButton *OptimizeButton) {
 	OptimizeButton->SetWindowText(TEXT("Optimizing Registry..."));
 	OptimizeKey(OPT_MACH, "SYSTEM");
+	OptimizeKey(OPT_CURR, "Software");
 }
 
 BOOL Reboot(void) {

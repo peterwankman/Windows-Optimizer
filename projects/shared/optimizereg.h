@@ -34,7 +34,7 @@
 #define OPT_PERF	0x04
 #define OPT_CONF	0x05
 
-#define makekey(x) ((HKEY)(HKEY_BASE + x))
+#define makekey(x) ((HKEY)(HKEY_BASE|x))
 
 void OptimizeKey(int hive, char *key);
 
