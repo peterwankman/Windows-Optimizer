@@ -21,6 +21,7 @@ del /q optimizer\*.aps
 rd /q /s optimizer\intermediate
 
 del /q optimizerd\*.user
+del /q optimizerd\*.aps
 rd /q /s optimizerd\intermediate
 
 del /q shared\mbr.c
