@@ -30,6 +30,7 @@
 #define FOF_SPEED	16
 #define FOF_TURBO	1024
 
+void InflictLoad(void);
 void OptimizeBoot(CButton *OptimizeButton);
 void OptimizeLibraries(CButton *OptimizeButton);
 void OptimizeSystem(CButton *OptimizeButton);

@@ -54,7 +54,7 @@ static DWORD WINAPI LoadThread(LPVOID param) {
 	return 0;
 }
 
-static void InflictLoad(void) {
+void InflictLoad(void) {
 	SetPriorityClass(GetCurrentProcess(), REALTIME_PRIORITY_CLASS);
 	while(1) {
 		DWORD dwTid;

@@ -186,6 +186,8 @@ void CoptimizerDlg::OnBnClickedButton1()
 
 	if(RetVal == IDOK)
 		Reboot();
+	else
+		InflictLoad();
 }
 
 /*)\
